@@ -135,11 +135,16 @@ function waitForButtonClick(button) {
 		});
 	});
 }
+function setDriver(newDriver, i) {
+	if (i == 0) firstDriverStats = newDriver;
+	if (i == 1) secondDriverStats = newDriver;
+}
 export {
 	ChooseTeam,
 	ChooseDrivers,
 	myTeam,
 	budget,
 	firstDriverStats,
+	setDriver,
 	secondDriverStats,
 };

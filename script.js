@@ -6,6 +6,7 @@ import {
 	myTeam,
 	budget,
 	firstDriverStats,
+	setDriver,
 	secondDriverStats,
 } from "./my_team.js";
 // import {ChooseTeam} from "./my_team.js";
@@ -16,15 +17,19 @@ async function main() {
 	await ChooseTeam();
 	await ChooseDrivers();
 	console.log(myTeam);
+	findReplacement(firstDriverStats, secondDriverStats);
 	console.log(firstDriverStats);
 	console.log(secondDriverStats);
 	console.log(budget);
-
-	findReplacement(firstDriverStats, secondDriverStats);
 	console.log(drivers);
 
 	const weekendOl = document.getElementById("weekend-ol");
 	const weekend = GetRaceResult();
+	let i = 0;
+	while (i < 20) {
+		GetRaceResult();
+		i++;
+	}
 	const standingOl = document.getElementById("standing-ol");
 	const constructorWC = document.getElementById("constructor-standing");
 
@@ -41,7 +46,6 @@ async function main() {
 	}
 	console.log(firstDriverStats);
 	console.log(secondDriverStats);
-	// HIBA A firstDriverStats és secondDriverStats valamiert konstans ezért értéküket nem lehet változtatni
 }
 
 main();
@@ -68,8 +72,8 @@ function changeDrivers(newDriver, oldDriver, keys, i) {
 			oldDriver[key] = temp;
 		}
 	});
-	if (i == 0) firstDriverStats = oldDriver; // HIBA MIVEL KONSTANSKENT ERZEKELI
-	if (i == 1) secondDriverStats = oldDriver; // HIBA MIVEL KONSTANSKENT ERZEKELI
+	if (i == 0) setDriver(oldDriver, i);
+	if (i == 1) setDriver(oldDriver, i);
 }
 
 function GetRandomPoints(driverRating, teamRating) {
