@@ -1,0 +1,49 @@
+import drivers from "./script.js";
+let teams = [];
+let budget = 100;
+async function ChooseTeam() {
+	const teamChoice = document.getElementById("team-choice");
+	const teamInput = document.getElementById("team-choice-input");
+	const teamOl = document.getElementById("team-choice-ol");
+	let myTeam;
+	drivers.forEach((driver) => {
+		if (!teams.includes(driver.team)) teams.push(driver.team);
+	});
+	console.log(teams);
+	for (let index = 0; index < teams.length; index++) {
+		const team = teams[index];
+		let teamLi = document.createElement("li");
+		teamLi.innerHTML = team;
+		teamOl.appendChild(teamLi);
+	}
+	await waitForButtonClick();
+
+	const choice = Number(teamInput.value);
+	for (let index = 0; index < teams.length; index++) {
+		const team = teams[index];
+		if (choice - 1 == index) {
+			myTeam = team;
+			drivers.forEach((element) => {
+				if (element.team == myTeam) budget -= element.teamPrice / 2;
+			});
+		}
+	}
+	teamChoice.style.display = "none";
+
+	// teamButton.addEventListener("click", () => {
+	//
+	// });
+	localStorage.setItem("myTeam", myTeam);
+	return myTeam;
+}
+
+function waitForButtonClick() {
+	const teamButton = document.getElementById("team-choice-button");
+
+	return new Promise((resolve) => {
+		teamButton.addEventListener("click", () => {
+			resolve(); // A gombnyomásra az ígéret teljesül
+		});
+	});
+}
+export {ChooseTeam};

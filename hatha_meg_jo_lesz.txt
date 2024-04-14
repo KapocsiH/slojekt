@@ -1,0 +1,51 @@
+import drivers from "./script.js";
+class Team {
+	constructor() {
+		this.teams = [];
+		this.team = this.ChooseTeam();
+		// this.budget = 100 - this.ChooseTeam();
+	}
+	ChooseTeam() {
+		const teamOl = document.getElementById("team-choice-ol");
+		drivers.forEach((driver) => {
+			if (!this.teams.includes(driver.team)) this.teams.push(driver.team);
+		});
+		console.log(this.teams);
+		for (let index = 0; index < this.teams.length; index++) {
+			const team = this.teams[index];
+			let teamLi = document.createElement("li");
+			teamLi.innerHTML = team;
+			teamOl.appendChild(teamLi);
+		}
+		return this.asyncCall();
+	}
+	OnClickEvent() {
+		const teamButton = document.getElementById("team-choice-button");
+		const teamChoice = document.getElementById("team-choice");
+		const teamInput = document.getElementById("team-choice-input");
+		let yourTeam;
+		const promise = new Promise((resolve) => {
+			teamButton.addEventListener("click", () => {
+				let cost;
+				const choice = Number(teamInput.value);
+				for (let index = 0; index < this.teams.length; index++) {
+					const team = this.teams[index];
+					if (choice - 1 == index) {
+						yourTeam = team;
+					}
+				}
+				teamChoice.style.display = "none";
+				resolve([yourTeam, 30]);
+			});
+		});
+		return promise.finally(() => {
+			return [yourTeam, 30];
+		});
+	}
+	async asyncCall() {
+		return await this.OnClickEvent();
+		console.log(result);
+	}
+}
+
+export {Team};
