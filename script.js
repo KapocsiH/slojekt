@@ -1,13 +1,14 @@
 import driverData from "./f1_stat.js";
 import {Driver} from "./drivers.js";
+import {tracks} from "./tracks.js";
 import {
 	ChooseTeam,
 	ChooseDrivers,
 	myTeam,
-	budget,
 	firstDriverStats,
 	setDriver,
 	secondDriverStats,
+	budget,
 } from "./my_team.js";
 // import {ChooseTeam} from "./my_team.js";
 const drivers = Driver.LoadData(driverData);
@@ -22,33 +23,121 @@ async function main() {
 	console.log(secondDriverStats);
 	console.log(budget);
 	console.log(drivers);
-
-	const weekendOl = document.getElementById("weekend-ol");
-	const weekend = GetRaceResult();
-	let i = 0;
-	while (i < 20) {
-		GetRaceResult();
-		i++;
-	}
+	let budgetForUpgrades = budget;
 	const standingOl = document.getElementById("standing-ol");
-	const constructorWC = document.getElementById("constructor-standing");
+	const nextRace = document.getElementById("next-race");
+	const upgrade = document.getElementById("upgrade");
+	const budgetH1 = document.getElementById("budget");
+	nextRace.style.display = "block";
+	let trackIndex = 0;
+	let teams = [];
 
-	drivers.sort(ComparePoints);
 	for (let index = 0; index < drivers.length; index++) {
-		let WCLi = document.createElement("li");
-		let weekendLi = document.createElement("li");
-		for (const [key, value] of Object.entries(weekend[index])) {
-			weekendLi.innerHTML = `${key}: ${value}`;
+		const driver = drivers[index];
+		let hasTeam = false;
+		let obj = {};
+		obj.name = driver.team;
+		teams.forEach((object) => {
+			if (object.name == driver.team) {
+				hasTeam = true;
+			}
+		});
+		if (!hasTeam) {
+			obj.points = 0;
+			teams.push(obj);
 		}
-		weekendOl.appendChild(weekendLi);
-		WCLi.innerHTML = `${drivers[index].name} &nbsp &nbsp ${drivers[index].points} point`;
-		standingOl.appendChild(WCLi);
 	}
+
+	upgrade.addEventListener("click", () => {
+		if (budgetForUpgrades >= 15) {
+			drivers.forEach((driver) => {
+				if (myTeam == driver.team) {
+					driver.teamRating += 5;
+				}
+			});
+			budgetForUpgrades -= 15;
+			budgetH1.innerHTML = `Budget: ${budgetForUpgrades}`;
+		}
+		console.log(drivers);
+	});
+
+	nextRace.addEventListener("click", () => {
+		upgrade.style.display = "block";
+
+		teams.forEach((team) => {
+			team.points = 0;
+		});
+		const weekend = GetRaceResult();
+		const weekendOl = document.getElementById("weekend-ol");
+		const standingH1 = document.getElementById("standing-h1");
+		const weekendH1 = document.getElementById("weekend-h1");
+		const constructorH1 = document.getElementById("constructor-standing-h1");
+		const constructorOl = document.getElementById("constructor-standing-ol");
+		constructorOl.innerHTML = "";
+		weekendOl.innerText = "";
+		standingOl.innerText = "";
+		weekendH1.innerText = `${tracks[trackIndex]} GP:`;
+		drivers.sort(ComparePoints);
+		for (let index = 0; index < drivers.length; index++) {
+			let WCLi = document.createElement("li");
+			let weekendLi = document.createElement("li");
+			for (const [key, value] of Object.entries(weekend[index])) {
+				weekendLi.innerHTML = `${key}: ${value}`;
+				weekendOl.appendChild(weekendLi);
+			}
+			// logRaceResult(weekendLi, index);
+			standingH1.innerText = "Championship Standing:";
+			WCLi.innerHTML = `${drivers[index].name} &nbsp &nbsp ${drivers[index].points} points`;
+			standingOl.appendChild(WCLi);
+
+			// constructor points
+			const driver = drivers[index];
+
+			teams.forEach((team) => {
+				if (team.name == driver.team) team.points += driver.points;
+			});
+		}
+
+		constructorH1.innerText = "Constructor Championship Standing:";
+		teams.sort(ComparePoints);
+		teams.forEach((teams) => {
+			let constructorLi = document.createElement("li");
+			constructorLi.innerHTML = `${teams.name} &nbsp &nbsp ${teams.points} points`;
+			constructorOl.appendChild(constructorLi);
+		});
+		trackIndex++;
+		if (trackIndex == tracks.length) nextRace.style.display = "none";
+		budgetForUpgrades += 5;
+		budgetH1.innerText = `Budget: ${budgetForUpgrades}`;
+	});
+
 	console.log(firstDriverStats);
 	console.log(secondDriverStats);
+	console.log(drivers);
 }
 
 main();
+
+// function logRaceResult(liElement, index) {
+// 	const weekend = GetRaceResult();
+
+// 	for (const [key, value] of Object.entries(weekend[index])) {
+// 		console.log(key);
+// 		console.log(value);
+// 		liElement.innerHTML = `${key}: ${value}`;
+// 	}
+// }
+
+// function getConstructorStanding() {
+// 	let teams = [];
+// 	drivers.forEach((element) => {
+// 		let obj = {};
+// 		obj[element.team] = 0;
+
+// 		if (!teams.includes()) teams.push(obj);
+// 	});
+// 	console.log(teams);
+// }
 
 function findReplacement(first, second) {
 	let i = 0;
