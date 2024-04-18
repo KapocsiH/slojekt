@@ -25,13 +25,18 @@ async function ChooseTeam() {
 		obj.name = element.team;
 		obj.rating = element.teamRating;
 		obj.price = element.teamPrice;
+		obj.picture = element.teamPicture;
 		teams.push(obj);
 	}
 
 	for (let index = 0; index < teams.length; index++) {
 		const team = teams[index];
 		let teamLi = document.createElement("li");
-		teamLi.innerHTML = `${team.name}, &nbsp RATING: ${team.rating}, &nbsp PRICE: ${team.price}`;
+		let teamImg = document.createElement("img");
+		teamImg.src = `img/teams/${team.picture}.png`;
+		teamImg.classList = "team-img margin";
+		teamLi.appendChild(teamImg);
+		teamLi.innerHTML += `${team.name}, &nbsp RATING: ${team.rating}, &nbsp PRICE: ${team.price}`;
 		teamOl.appendChild(teamLi);
 	}
 	await waitForButtonClick(teamButton);
@@ -75,6 +80,7 @@ async function ChooseDrivers() {
 					obj.name = driver.name;
 					obj.rating = driver.rating;
 					obj.price = driver.price;
+					obj.picture = driver.driverPicture;
 					driversList.push(obj);
 				}
 			} else if (driver.price <= budget && firstDriver != driver.name) {
@@ -82,14 +88,19 @@ async function ChooseDrivers() {
 				obj.name = driver.name;
 				obj.rating = driver.rating;
 				obj.price = driver.price;
+				obj.picture = driver.driverPicture;
 				driversList.push(obj);
 			}
 		});
 		driversOl.innerHTML = "";
 		for (let index = 0; index < driversList.length; index++) {
+			let driverImg = document.createElement("img");
 			const driver = driversList[index];
+			driverImg.src = `img/drivers/${driver.picture}.png`;
+			driverImg.classList = "driver-img margin";
 			let driverLi = document.createElement("li");
-			driverLi.innerHTML = `${driver.name}, &nbsp RATING: ${driver.rating}, &nbsp PRICE: ${driver.price}`;
+			driverLi.appendChild(driverImg);
+			driverLi.innerHTML += `${driver.name}, &nbsp RATING: ${driver.rating}, &nbsp PRICE: ${driver.price}`;
 			driversOl.appendChild(driverLi);
 		}
 		driversChoice.style.display = "block";
@@ -139,6 +150,7 @@ function setDriver(newDriver, i) {
 	if (i == 0) firstDriverStats = newDriver;
 	if (i == 1) secondDriverStats = newDriver;
 }
+
 export {
 	ChooseTeam,
 	ChooseDrivers,

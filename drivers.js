@@ -9,6 +9,8 @@ class Driver {
 		this.teamRating = Number(splitted[4]);
 		this.points = Number(splitted[5]);
 		this.teamPrice = Number(splitted[6]);
+		this.driverPicture = splitted[7];
+		this.teamPicture = splitted[8];
 	}
 
 	static LoadData(driverData) {

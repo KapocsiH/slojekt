@@ -37,6 +37,7 @@ async function main() {
 		let hasTeam = false;
 		let obj = {};
 		obj.name = driver.team;
+		obj.picture = driver.teamPicture;
 		teams.forEach((object) => {
 			if (object.name == driver.team) {
 				hasTeam = true;
@@ -79,15 +80,31 @@ async function main() {
 		weekendH1.innerText = `${tracks[trackIndex]} GP:`;
 		drivers.sort(ComparePoints);
 		for (let index = 0; index < drivers.length; index++) {
+			let driverImg = document.createElement("img");
+			driverImg.src = `img/drivers/${drivers[index].driverPicture}.png`;
+			driverImg.classList = "driver-img margin";
 			let WCLi = document.createElement("li");
 			let weekendLi = document.createElement("li");
 			for (const [key, value] of Object.entries(weekend[index])) {
-				weekendLi.innerHTML = `${key}: ${value}`;
+				let driverPicture;
+				let driverTeam;
+				drivers.forEach((driver) => {
+					if (driver.name == key) {
+						driverPicture = driver.driverPicture;
+						driverTeam = driver.team;
+					}
+				});
+				let driverImg = document.createElement("img");
+				driverImg.src = `img/drivers/${driverPicture}.png`;
+				driverImg.classList = "driver-img margin";
+				weekendLi.appendChild(driverImg);
+				weekendLi.innerHTML += `${key}: ${value}, &nbsp ${driverTeam}`;
 				weekendOl.appendChild(weekendLi);
 			}
 			// logRaceResult(weekendLi, index);
 			standingH1.innerText = "Championship Standing:";
-			WCLi.innerHTML = `${drivers[index].name} &nbsp &nbsp ${drivers[index].points} points`;
+			WCLi.appendChild(driverImg);
+			WCLi.innerHTML += `${drivers[index].name} &nbsp &nbsp ${drivers[index].points} points`;
 			standingOl.appendChild(WCLi);
 
 			// constructor points
@@ -100,9 +117,13 @@ async function main() {
 
 		constructorH1.innerText = "Constructor Championship Standing:";
 		teams.sort(ComparePoints);
-		teams.forEach((teams) => {
+		teams.forEach((team) => {
+			let teamImg = document.createElement("img");
+			teamImg.src = `img/teams/${team.picture}.png`;
+			teamImg.classList = "team-img margin";
 			let constructorLi = document.createElement("li");
-			constructorLi.innerHTML = `${teams.name} &nbsp &nbsp ${teams.points} points`;
+			constructorLi.appendChild(teamImg);
+			constructorLi.innerHTML += `${team.name} &nbsp &nbsp ${team.points} points`;
 			constructorOl.appendChild(constructorLi);
 		});
 		trackIndex++;
@@ -143,10 +164,20 @@ function findReplacement(first, second) {
 	let i = 0;
 	drivers.forEach((driver) => {
 		if (i < 1 && myTeam == driver.team) {
-			changeDrivers(first, driver, ["name", "price", "rating"], 0);
+			changeDrivers(
+				first,
+				driver,
+				["name", "price", "rating", "driverPicture", "teamPicture"],
+				0
+			);
 			i++;
 		} else if (myTeam == driver.team)
-			changeDrivers(second, driver, ["name", "price", "rating"], 1);
+			changeDrivers(
+				second,
+				driver,
+				["name", "price", "rating", "driverPicture", "teamPicture"],
+				1
+			);
 	});
 }
 
