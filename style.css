@@ -1,3 +1,13 @@
 #drivers-choice {
 	display: none;
 }
+#next-race {
+	display: none;
+}
+#upgrade {
+	display: none;
+}
+div {
+	margin: 50px;
+	float: left;
+}
