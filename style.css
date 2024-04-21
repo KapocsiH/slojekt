@@ -1,22 +1,94 @@
+@font-face {
+	font-family: "f1-boldest";
+	src: url(fonts/Formula1_boldest.ttf);
+}
+@font-face {
+	font-family: "f1-bold";
+	src: url(fonts/Formula1_Bold.ttf);
+}
+@font-face {
+	font-family: "f1-regular";
+	src: url(fonts/Formula1_Regular.ttf);
+}
+body {
+	font-family: "f1-regular";
+	margin: 0;
+	padding: 0;
+}
+#container {
+	display: flex;
+}
+#team-choice {
+	margin: 0 auto;
+	width: 90%;
+}
 #drivers-choice {
+	margin: 0 auto;
+	display: none;
+	width: 90%;
+}
+#drivers-choice-ol,
+#team-choice-ol {
+	padding: 0;
+	margin-bottom: 30px;
+}
+#drivers-choice-ol li,
+#team-choice-ol li {
+	display: none;
+}
+#drivers-choice-ol button,
+#team-choice-ol button {
+	border: none;
+	background-color: inherit;
+}
+.arrow-img {
+	width: 40%;
+	cursor: pointer;
+}
+#drivers-choice-ol li div,
+#team-choice-ol li div {
+	padding: 30px;
+	border-radius: 10px;
+	border: 5px solid black;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: center;
+}
+#drivers-choice-ol li div img {
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+.active {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+}
+#upgrade {
 	display: none;
 }
 #next-race {
 	display: none;
 }
-#upgrade {
-	display: none;
-}
-div {
-	margin: 50px;
-	float: left;
-}
 .team-img {
-	width: 5%;
+	display: block;
+	margin: 0 auto;
+	width: 70%;
 }
 .margin {
 	margin-top: 10px;
 }
 .driver-img {
-	width: 10%;
+	width: 80%;
+}
+.driver-result-img {
+	width: 6%;
+}
+.team-result-img {
+	width: 12%;
+}
+.confirm-button {
+	width: 30%;
+	display: block;
+	margin: 0 auto;
 }

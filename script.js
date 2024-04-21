@@ -57,7 +57,7 @@ async function main() {
 				}
 			});
 			budgetForUpgrades -= 15;
-			budgetH1.innerHTML = `Budget: ${budgetForUpgrades}`;
+			budgetH1.innerHTML = `Budget: ${budgetForUpgrades}M`;
 		}
 		console.log(drivers);
 	});
@@ -82,7 +82,7 @@ async function main() {
 		for (let index = 0; index < drivers.length; index++) {
 			let driverImg = document.createElement("img");
 			driverImg.src = `img/drivers/${drivers[index].driverPicture}.png`;
-			driverImg.classList = "driver-img margin";
+			driverImg.classList = "driver-result-img margin";
 			let WCLi = document.createElement("li");
 			let weekendLi = document.createElement("li");
 			for (const [key, value] of Object.entries(weekend[index])) {
@@ -96,7 +96,7 @@ async function main() {
 				});
 				let driverImg = document.createElement("img");
 				driverImg.src = `img/drivers/${driverPicture}.png`;
-				driverImg.classList = "driver-img margin";
+				driverImg.classList = "driver-result-img margin";
 				weekendLi.appendChild(driverImg);
 				weekendLi.innerHTML += `${key}: ${value}, &nbsp ${driverTeam}`;
 				weekendOl.appendChild(weekendLi);
@@ -120,7 +120,7 @@ async function main() {
 		teams.forEach((team) => {
 			let teamImg = document.createElement("img");
 			teamImg.src = `img/teams/${team.picture}.png`;
-			teamImg.classList = "team-img margin";
+			teamImg.classList = "team-result-img margin";
 			let constructorLi = document.createElement("li");
 			constructorLi.appendChild(teamImg);
 			constructorLi.innerHTML += `${team.name} &nbsp &nbsp ${team.points} points`;
@@ -128,8 +128,11 @@ async function main() {
 		});
 		trackIndex++;
 		if (trackIndex == tracks.length) nextRace.style.display = "none";
-		budgetForUpgrades += 5;
-		budgetH1.innerText = `Budget: ${budgetForUpgrades}`;
+		let upgradeCalculator = Math.floor(Math.random() * 30 + 1);
+		if (upgradeCalculator >= 20) budgetForUpgrades += 7;
+		else if (upgradeCalculator >= 10) budgetForUpgrades += 4;
+		else if (upgradeCalculator >= 4) budgetForUpgrades += 2;
+		budgetH1.innerText = `Budget: ${budgetForUpgrades}M`;
 	});
 
 	console.log(firstDriverStats);
@@ -139,27 +142,6 @@ async function main() {
 
 main();
 
-// function logRaceResult(liElement, index) {
-// 	const weekend = GetRaceResult();
-
-// 	for (const [key, value] of Object.entries(weekend[index])) {
-// 		console.log(key);
-// 		console.log(value);
-// 		liElement.innerHTML = `${key}: ${value}`;
-// 	}
-// }
-
-// function getConstructorStanding() {
-// 	let teams = [];
-// 	drivers.forEach((element) => {
-// 		let obj = {};
-// 		obj[element.team] = 0;
-
-// 		if (!teams.includes()) teams.push(obj);
-// 	});
-// 	console.log(teams);
-// }
-
 function findReplacement(first, second) {
 	let i = 0;
 	drivers.forEach((driver) => {
@@ -167,7 +149,7 @@ function findReplacement(first, second) {
 			changeDrivers(
 				first,
 				driver,
-				["name", "price", "rating", "driverPicture", "teamPicture"],
+				["name", "price", "rating", "driverPicture"],
 				0
 			);
 			i++;
@@ -175,7 +157,7 @@ function findReplacement(first, second) {
 			changeDrivers(
 				second,
 				driver,
-				["name", "price", "rating", "driverPicture", "teamPicture"],
+				["name", "price", "rating", "driverPicture"],
 				1
 			);
 	});

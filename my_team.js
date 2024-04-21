@@ -11,14 +11,7 @@ async function ChooseTeam() {
 	const teamInput = document.getElementById("team-choice-input");
 	const teamOl = document.getElementById("team-choice-ol");
 	const teamButton = document.getElementById("team-choice-button");
-	// drivers.forEach((driver) => {
-	// 	let obj = {};
-	// 	obj.name = driver.team;
-	// 	obj.rating = driver.teamRating;
-	// 	obj.price = driver.teamPrice;
-	// 	teams.push(obj);
-	// 	// if (!teams.includes(driver.team)) teams.push(driver.team);
-	// });
+
 	for (let index = 0; index < drivers.length; index = index + 2) {
 		const element = drivers[index];
 		let obj = {};
@@ -29,22 +22,87 @@ async function ChooseTeam() {
 		teams.push(obj);
 	}
 
-	for (let index = 0; index < teams.length; index++) {
-		const team = teams[index];
-		let teamLi = document.createElement("li");
+	let selectedTeamIndex = 0;
+	let leftArrowButton;
+	let rightArrowButton;
+	leftArrowButton = document.createElement("button");
+	rightArrowButton = document.createElement("button");
+	let div = document.createElement("div");
+	let leftArrow = document.createElement("img");
+	leftArrow.classList = "arrow-img";
+	leftArrow.src = "img/other/arrow_left.png";
+	leftArrowButton.appendChild(leftArrow);
+	let rightArrow = document.createElement("img");
+	rightArrow.classList = "arrow-img";
+	rightArrow.src = "img/other/arrow_right.png";
+	rightArrowButton.appendChild(rightArrow);
+	let teamImg = document.createElement("img");
+	const team = teams[selectedTeamIndex];
+	teamImg.src = `img/teams/${team.picture}.png`;
+	teamImg.classList = "team-img margin";
+	div.appendChild(teamImg);
+	div.innerHTML += `<span>RATING: ${team.rating} &nbsp PRICE: ${team.price}</span>`;
+	let teamLi = document.createElement("li");
+	teamLi.classList = "active";
+	teamLi.appendChild(leftArrowButton);
+	teamLi.appendChild(div);
+	teamLi.appendChild(rightArrowButton);
+	teamOl.appendChild(teamLi);
+
+	rightArrowButton.addEventListener("click", () => {
+		teamOl.innerHTML = "";
+		selectedTeamIndex++;
+		if (selectedTeamIndex == teams.length) selectedTeamIndex = 0;
+		console.log(selectedTeamIndex);
+		console.log(teams[selectedTeamIndex]);
+		let div = document.createElement("div");
 		let teamImg = document.createElement("img");
+		const team = teams[selectedTeamIndex];
 		teamImg.src = `img/teams/${team.picture}.png`;
 		teamImg.classList = "team-img margin";
-		teamLi.appendChild(teamImg);
-		teamLi.innerHTML += `${team.name}, &nbsp RATING: ${team.rating}, &nbsp PRICE: ${team.price}`;
+		div.appendChild(teamImg);
+		div.innerHTML += `<span>RATING: ${team.rating} &nbsp PRICE: ${team.price}</span>`;
+		let teamLi = document.createElement("li");
+		teamLi.classList = "active";
+		teamLi.appendChild(leftArrowButton);
+		teamLi.appendChild(div);
+		teamLi.appendChild(rightArrowButton);
 		teamOl.appendChild(teamLi);
-	}
-	await waitForButtonClick(teamButton);
+		console.log(rightArrowButton);
+		console.log(selectedTeamIndex);
+	});
 
-	const choice = Number(teamInput.value);
+	leftArrowButton.addEventListener("click", () => {
+		teamOl.innerHTML = "";
+		selectedTeamIndex--;
+		if (selectedTeamIndex < 0) selectedTeamIndex = teams.length - 1;
+		let div = document.createElement("div");
+		let teamImg = document.createElement("img");
+		const team = teams[selectedTeamIndex];
+		teamImg.src = `img/teams/${team.picture}.png`;
+		teamImg.classList = "team-img margin";
+		div.appendChild(teamImg);
+		div.innerHTML += `<span>RATING: ${team.rating} &nbsp PRICE: ${team.price}</span>`;
+		let teamLi = document.createElement("li");
+		teamLi.classList = "active";
+		teamLi.appendChild(leftArrowButton);
+		teamLi.appendChild(div);
+		teamLi.appendChild(rightArrowButton);
+		teamOl.appendChild(teamLi);
+		console.log(selectedTeamIndex);
+	});
+
+	let confirmButton = document.createElement("button");
+	confirmButton.innerText = `Choose`;
+	confirmButton.classList = "confirm-button";
+	teamChoice.appendChild(confirmButton);
+
+	await waitForButtonClick(confirmButton);
+
+	const choice = selectedTeamIndex;
 	for (let index = 0; index < teams.length; index++) {
 		const team = teams[index].name;
-		if (choice - 1 == index) {
+		if (choice == index) {
 			myTeam = team;
 			drivers.forEach((element) => {
 				if (element.team == myTeam) budget -= element.teamPrice / 2;
@@ -69,6 +127,10 @@ async function ChooseDrivers() {
 	drivers.forEach((element) => {
 		if (element.price < minPriceDriver.price) minPriceDriver = element;
 	});
+	let confirmButton = document.createElement("button");
+	confirmButton.innerText = `Choose`;
+	confirmButton.classList = "confirm-button";
+	driversChoice.appendChild(confirmButton);
 	for (let round = 0; round < 2; round++) {
 		let driversList = [];
 
@@ -93,38 +155,92 @@ async function ChooseDrivers() {
 			}
 		});
 		driversOl.innerHTML = "";
-		for (let index = 0; index < driversList.length; index++) {
+
+		let selectedDriverIndex = 0;
+		let leftArrowButton;
+		let rightArrowButton;
+		leftArrowButton = document.createElement("button");
+		rightArrowButton = document.createElement("button");
+		let div = document.createElement("div");
+		let leftArrow = document.createElement("img");
+		leftArrow.classList = "arrow-img";
+		leftArrow.src = "img/other/arrow_left.png";
+		leftArrowButton.appendChild(leftArrow);
+		let rightArrow = document.createElement("img");
+		rightArrow.classList = "arrow-img";
+		rightArrow.src = "img/other/arrow_right.png";
+		rightArrowButton.appendChild(rightArrow);
+		let driverImg = document.createElement("img");
+		const driver = driversList[selectedDriverIndex];
+		driverImg.src = `img/drivers/${driver.picture}.png`;
+		driverImg.classList = "driver-img margin";
+		div.appendChild(driverImg);
+		div.innerHTML += `<span>${driver.name} &nbsp RATING: ${driver.rating} &nbsp PRICE: ${driver.price}</span>`;
+		let driverLi = document.createElement("li");
+		driverLi.classList = "active";
+		driverLi.appendChild(leftArrowButton);
+		driverLi.appendChild(div);
+		driverLi.appendChild(rightArrowButton);
+		driversOl.appendChild(driverLi);
+
+		rightArrowButton.addEventListener("click", () => {
+			driversOl.innerHTML = "";
+			selectedDriverIndex++;
+			if (selectedDriverIndex == driversList.length) selectedDriverIndex = 0;
+			console.log(selectedDriverIndex);
+			console.log(driversList[selectedDriverIndex]);
+			let div = document.createElement("div");
 			let driverImg = document.createElement("img");
-			const driver = driversList[index];
+			const driver = driversList[selectedDriverIndex];
 			driverImg.src = `img/drivers/${driver.picture}.png`;
 			driverImg.classList = "driver-img margin";
+			div.appendChild(driverImg);
+			div.innerHTML += `<span>${driver.name} &nbsp RATING: ${driver.rating} &nbsp PRICE: ${driver.price}</span>`;
 			let driverLi = document.createElement("li");
-			driverLi.appendChild(driverImg);
-			driverLi.innerHTML += `${driver.name}, &nbsp RATING: ${driver.rating}, &nbsp PRICE: ${driver.price}`;
+			driverLi.classList = "active";
+			driverLi.appendChild(leftArrowButton);
+			driverLi.appendChild(div);
+			driverLi.appendChild(rightArrowButton);
 			driversOl.appendChild(driverLi);
-		}
-		driversChoice.style.display = "block";
-		await waitForButtonClick(driverButton);
-		const choice = Number(driverInput.value);
-		driverInput.value = "";
+			console.log(rightArrowButton);
+			console.log(selectedDriverIndex);
+		});
 
+		leftArrowButton.addEventListener("click", () => {
+			driversOl.innerHTML = "";
+			selectedDriverIndex--;
+			if (selectedDriverIndex < 0) selectedDriverIndex = driversList.length - 1;
+			let div = document.createElement("div");
+			let driverImg = document.createElement("img");
+			const driver = driversList[selectedDriverIndex];
+			driverImg.src = `img/drivers/${driver.picture}.png`;
+			driverImg.classList = "driver-img margin";
+			div.appendChild(driverImg);
+			div.innerHTML += `<span>${driver.name} &nbsp RATING: ${driver.rating} &nbsp PRICE: ${driver.price}</span>`;
+			let driverLi = document.createElement("li");
+			driverLi.classList = "active";
+			driverLi.appendChild(leftArrowButton);
+			driverLi.appendChild(div);
+			driverLi.appendChild(rightArrowButton);
+			driversOl.appendChild(driverLi);
+			console.log(selectedDriverIndex);
+		});
+
+		driversChoice.style.display = "block";
+
+		await waitForButtonClick(confirmButton);
+		const choice = selectedDriverIndex;
 		for (let index = 0; index < driversList.length; index++) {
 			const driver = driversList[index];
-			if (choice - 1 == index && round == 0) {
+			if (choice == index && round == 0) {
 				firstDriver = driver.name;
 				drivers.forEach((element) => {
 					if (element.name == firstDriver) {
 						budget -= element.price;
 						firstDriverStats = element;
 					}
-
-					// if (element.team == myTeam){
-					// 	const changedSeat = element;
-					// 	element.name = firstDriver;
-					// 	ele
-					// }
 				});
-			} else if (choice - 1 == index && round == 1) {
+			} else if (choice == index && round == 1) {
 				secondDriver = driver.name;
 				drivers.forEach((element) => {
 					if (element.name == secondDriver) {
