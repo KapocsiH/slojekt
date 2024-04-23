@@ -3,39 +3,53 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>F1 Fantasy League</title>
 		<link rel="stylesheet" href="style.css" />
+		<link rel="icon" type="image/x-icon" href="/img/other/favicon.ico" />
 	</head>
 	<body>
-		<div id="team-choice">
-			<h1>Budget: 100M</h1>
-			<h1>Choose Your Team:</h1>
-			<ol id="team-choice-ol"></ol>
+		<div id="wrapper">
+			<div id="display">
+				<img src="img/other/f1logo.png" id="f1logo" />
+				<h1 id="indexh1">Fantasy League</h1>
+				<h2 id="indexh2">
+					Make your own team, and climb the rankings of the Pinnacle of
+					Motorsports!
+				</h2>
+				<button id="takemethere">Take me there!</button>
+			</div>
 		</div>
-		<div id="drivers-choice">
-			<h1 id="remaining-budget"></h1>
-			<h1 id="chosen-team">Your Chosen Team:</h1>
-			<h1>Choose Your Drivers:</h1>
-			<ol id="drivers-choice-ol"></ol>
-			<!-- <input type="number" id="driver-choice-input" />
-			<button id="driver-choice-button">Choose</button> -->
-		</div>
-		<div id="container">
-			<div id="weekend">
-				<h1 id="budget"></h1>
-				<h1 id="weekend-h1"></h1>
-				<ol id="weekend-ol"></ol>
+		<div id="dontdisplay">
+			<div id="team-choice">
+				<h1>Budget: 100M</h1>
+				<h1>Choose Your Team:</h1>
+				<ol id="team-choice-ol"></ol>
 			</div>
-			<div id="standing">
-				<h1 id="standing-h1"></h1>
-				<ol id="standing-ol"></ol>
+			<div id="drivers-choice">
+				<h1 id="remaining-budget"></h1>
+				<h1 id="chosen-team">Your Chosen Team:</h1>
+				<h1>Choose Your Drivers:</h1>
+				<ol id="drivers-choice-ol"></ol>
+				<!-- <input type="number" id="driver-choice-input" />
+				<button id="driver-choice-button">Choose</button> -->
 			</div>
-			<div id="constructor-standing">
-				<h1 id="constructor-standing-h1"></h1>
-				<ol id="constructor-standing-ol"></ol>
+			<div id="container">
+				<div id="weekend">
+					<h1 id="budget"></h1>
+					<h1 id="weekend-h1"></h1>
+					<ol id="weekend-ol"></ol>
+				</div>
+				<div id="standing">
+					<h1 id="standing-h1"></h1>
+					<ol id="standing-ol"></ol>
+				</div>
+				<div id="constructor-standing">
+					<h1 id="constructor-standing-h1"></h1>
+					<ol id="constructor-standing-ol"></ol>
+				</div>
+				<button id="next-race">Race Weekend</button>
+				<button id="upgrade">Upgrade The Car</button>
 			</div>
-			<button id="next-race">Race Weekend</button>
-			<button id="upgrade">Upgrade The Car</button>
 		</div>
 		<!-- <h1>Constructor WC:</h1>
 		<ol id="constructor-standing"></ol> -->
