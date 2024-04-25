@@ -253,6 +253,7 @@ async function ChooseDrivers() {
 	}
 
 	driversChoice.style.display = "none";
+	document.getElementById("container").classList = "";
 }
 
 function waitForButtonClick(button) {

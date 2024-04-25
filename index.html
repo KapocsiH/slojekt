@@ -8,7 +8,7 @@
 		<link rel="icon" type="image/x-icon" href="/img/other/favicon.ico" />
 	</head>
 	<body>
-		<div id="wrapper">
+		<!-- <div id="wrapper">
 			<div id="display">
 				<img src="img/other/f1logo.png" id="f1logo" />
 				<h1 id="indexh1">Fantasy League</h1>
@@ -18,8 +18,8 @@
 				</h2>
 				<button id="takemethere">Take me there!</button>
 			</div>
-		</div>
-		<div id="dontdisplay">
+		</div> -->
+		<div class="dotdisplay">
 			<div id="team-choice">
 				<h1>Budget: 100M</h1>
 				<h1>Choose Your Team:</h1>
@@ -33,9 +33,8 @@
 				<!-- <input type="number" id="driver-choice-input" />
 				<button id="driver-choice-button">Choose</button> -->
 			</div>
-			<div id="container">
+			<div id="container" class="dontdisplay">
 				<div id="weekend">
-					<h1 id="budget"></h1>
 					<h1 id="weekend-h1"></h1>
 					<ol id="weekend-ol"></ol>
 				</div>
@@ -47,9 +46,12 @@
 					<h1 id="constructor-standing-h1"></h1>
 					<ol id="constructor-standing-ol"></ol>
 				</div>
-				<button id="next-race">Race Weekend</button>
-				<button id="upgrade">Upgrade The Car</button>
+				<div>
+					<button id="next-race">Race Weekend</button>
+					<button id="upgrade">Upgrade The Car</button>
+				</div>
 			</div>
+			<h1 id="budget"></h1>
 		</div>
 		<!-- <h1>Constructor WC:</h1>
 		<ol id="constructor-standing"></ol> -->

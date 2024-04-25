@@ -17,9 +17,12 @@ body {
 	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
 		url(img/other/background.png);
 	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 #container {
 	display: flex;
+	justify-content: space-between;
 }
 #team-choice {
 	margin: 0 auto;
@@ -52,7 +55,8 @@ body {
 #team-choice-ol li div {
 	padding: 30px;
 	border-radius: 10px;
-	border: 5px solid black;
+	border: 5px solid white;
+	background-color: white;
 	display: flex;
 	flex-direction: column;
 	text-align: center;
@@ -85,7 +89,7 @@ body {
 	width: 80%;
 }
 .driver-result-img {
-	width: 6%;
+	width: 60px;
 }
 .team-result-img {
 	width: 12%;
@@ -108,8 +112,8 @@ body {
 	margin: 0;
 }
 
-#dontdisplay {
-	display: none;
+.dontdisplay {
+	display: none !important;
 }
 
 #f1logo {
@@ -139,4 +143,33 @@ button {
 	border: 5px red solid;
 	border-radius: 10px;
 	cursor: pointer;
+}
+
+h1 {
+	color: white;
+}
+
+li {
+	color: black;
+}
+
+ol {
+	border: 5px red solid;
+	border-radius: 10px;
+	background-color: white;
+	color: black;
+}
+ol li {
+	margin: 15px 0;
+}
+
+ol img {
+	margin: 0;
+	margin-right: 5px;
+	margin-left: 5px;
+	width: 40px;
+}
+#constructor-standing-ol li {
+	display: flex;
+	align-items: center;
 }

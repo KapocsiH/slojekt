@@ -63,6 +63,7 @@ async function main() {
 	});
 
 	nextRace.addEventListener("click", () => {
+		document.getElementById("container").classList = "";
 		upgrade.style.display = "block";
 
 		teams.forEach((team) => {
@@ -98,7 +99,7 @@ async function main() {
 				driverImg.src = `img/drivers/${driverPicture}.png`;
 				driverImg.classList = "driver-result-img margin";
 				weekendLi.appendChild(driverImg);
-				weekendLi.innerHTML += `${key}: ${value}, &nbsp ${driverTeam}`;
+				weekendLi.innerHTML += `${key} &nbsp ${driverTeam}`;
 				weekendOl.appendChild(weekendLi);
 			}
 			// logRaceResult(weekendLi, index);
@@ -117,14 +118,17 @@ async function main() {
 
 		constructorH1.innerText = "Constructor Championship Standing:";
 		teams.sort(ComparePoints);
+		let i = 1;
 		teams.forEach((team) => {
 			let teamImg = document.createElement("img");
 			teamImg.src = `img/teams/${team.picture}.png`;
 			teamImg.classList = "team-result-img margin";
 			let constructorLi = document.createElement("li");
+			constructorLi.innerHTML += `${i}.`;
 			constructorLi.appendChild(teamImg);
 			constructorLi.innerHTML += `${team.name} &nbsp &nbsp ${team.points} points`;
 			constructorOl.appendChild(constructorLi);
+			i++;
 		});
 		trackIndex++;
 		if (trackIndex == tracks.length) nextRace.style.display = "none";
