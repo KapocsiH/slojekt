@@ -26,7 +26,6 @@ async function main() {
 	console.log(drivers);
 	let budgetForUpgrades = budget;
 	const outerLineUp = document.getElementById("outer-lineup");
-	const lineUp = document.getElementById("lineup");
 	const lineUpFirst = document.getElementById("lineup-first");
 	const lineUpTeam = document.getElementById("lineup-team");
 	const lineUpSecond = document.getElementById("lineup-second");
@@ -59,13 +58,10 @@ async function main() {
 	startSeason.style.display = "block";
 	outerLineUp.style.display = "flex";
 
-	drivers.forEach((driver) => {
-		if (driver.name == firstDriverStats.name) {
-			const img = document.createElement("img");
-			img.src = `img/drivers/${driver.driverPicture}.png`;
-			lineUpFirst.appendChild(img);
-		}
-	});
+	let img = document.createElement("img");
+	img.src = `img/drivers/${firstDriverStats.driverPicture}.png`;
+	lineUpFirst.appendChild(img);
+
 	teams.forEach((team) => {
 		if (team.name == myTeam) {
 			const img = document.createElement("img");
@@ -73,13 +69,9 @@ async function main() {
 			lineUpTeam.appendChild(img);
 		}
 	});
-	drivers.forEach((driver) => {
-		if (driver.name == secondDriverStats.name) {
-			const img = document.createElement("img");
-			img.src = `img/drivers/${driver.driverPicture}.png`;
-			lineUpSecond.appendChild(img);
-		}
-	});
+	img = document.createElement("img");
+	img.src = `img/drivers/${secondDriverStats.driverPicture}.png`;
+	lineUpSecond.appendChild(img);
 
 	upgrade.addEventListener("click", () => {
 		if (budgetForUpgrades >= 15) {
