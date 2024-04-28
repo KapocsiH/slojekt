@@ -17,18 +17,25 @@ export default drivers;
 async function main() {
 	await ChooseTeam();
 	await ChooseDrivers();
-	console.log(myTeam);
+	console.log(firstDriverStats);
+	console.log(secondDriverStats);
 	findReplacement(firstDriverStats, secondDriverStats);
 	console.log(firstDriverStats);
 	console.log(secondDriverStats);
 	console.log(budget);
 	console.log(drivers);
 	let budgetForUpgrades = budget;
+	const outerLineUp = document.getElementById("outer-lineup");
+	const lineUp = document.getElementById("lineup");
+	const lineUpFirst = document.getElementById("lineup-first");
+	const lineUpTeam = document.getElementById("lineup-team");
+	const lineUpSecond = document.getElementById("lineup-second");
 	const standingOl = document.getElementById("standing-ol");
 	const nextRace = document.getElementById("next-race");
+	const startSeason = document.getElementById("start-season");
 	const upgrade = document.getElementById("upgrade");
 	const budgetH1 = document.getElementById("budget");
-	nextRace.style.display = "block";
+
 	let trackIndex = 0;
 	let teams = [];
 
@@ -49,20 +56,57 @@ async function main() {
 		}
 	}
 
+	startSeason.style.display = "block";
+	outerLineUp.style.display = "flex";
+
+	drivers.forEach((driver) => {
+		if (driver.name == firstDriverStats.name) {
+			const img = document.createElement("img");
+			img.src = `img/drivers/${driver.driverPicture}.png`;
+			lineUpFirst.appendChild(img);
+		}
+	});
+	teams.forEach((team) => {
+		if (team.name == myTeam) {
+			const img = document.createElement("img");
+			img.src = `img/teams/${team.picture}.png`;
+			lineUpTeam.appendChild(img);
+		}
+	});
+	drivers.forEach((driver) => {
+		if (driver.name == secondDriverStats.name) {
+			const img = document.createElement("img");
+			img.src = `img/drivers/${driver.driverPicture}.png`;
+			lineUpSecond.appendChild(img);
+		}
+	});
+
 	upgrade.addEventListener("click", () => {
 		if (budgetForUpgrades >= 15) {
 			drivers.forEach((driver) => {
 				if (myTeam == driver.team) {
-					driver.teamRating += 5;
+					driver.teamRating += 6;
 				}
 			});
 			budgetForUpgrades -= 15;
-			budgetH1.innerHTML = `Budget: ${budgetForUpgrades}M`;
+			budgetH1.innerHTML = `Budget: 15/${budgetForUpgrades}M`;
 		}
 		console.log(drivers);
 	});
 
-	nextRace.addEventListener("click", () => {
+	startSeason.addEventListener("click", displayWeekend);
+	nextRace.addEventListener("click", displayWeekend);
+
+	console.log(firstDriverStats);
+	console.log(secondDriverStats);
+	console.log(drivers);
+	function displayWeekend() {
+		outerLineUp.style.display = "none";
+		startSeason.style.display = "none";
+		nextRace.style.display = "block";
+		document.getElementById("weekend").style.display = "block";
+		document.getElementById("standing").style.display = "block";
+		document.getElementById("constructor-standing").style.display = "block";
 		document.getElementById("container").classList = "";
 		upgrade.style.display = "block";
 
@@ -136,12 +180,8 @@ async function main() {
 		if (upgradeCalculator >= 20) budgetForUpgrades += 7;
 		else if (upgradeCalculator >= 10) budgetForUpgrades += 4;
 		else if (upgradeCalculator >= 4) budgetForUpgrades += 2;
-		budgetH1.innerText = `Budget: ${budgetForUpgrades}M`;
-	});
-
-	console.log(firstDriverStats);
-	console.log(secondDriverStats);
-	console.log(drivers);
+		budgetH1.innerText = `Budget: 15/${budgetForUpgrades}M`;
+	}
 }
 
 main();
@@ -149,7 +189,7 @@ main();
 function findReplacement(first, second) {
 	let i = 0;
 	drivers.forEach((driver) => {
-		if (i < 1 && myTeam == driver.team) {
+		if (i < 1 && myTeam == driver.team && second.name != driver.name) {
 			changeDrivers(
 				first,
 				driver,

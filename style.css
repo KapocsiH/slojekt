@@ -95,7 +95,7 @@ body {
 	width: 12%;
 }
 .confirm-button {
-	width: 30%;
+	/* width: 30%; */
 	display: block;
 	margin: 0 auto;
 }
@@ -160,7 +160,7 @@ ol {
 	color: black;
 }
 ol li {
-	margin: 15px 0;
+	margin: 5px 0;
 }
 
 ol img {
@@ -172,4 +172,47 @@ ol img {
 #constructor-standing-ol li {
 	display: flex;
 	align-items: center;
+}
+#weekend,
+#standing,
+#constructor-standing {
+	display: none;
+}
+#outer-lineup {
+	display: none;
+	align-items: flex-end;
+	height: 50vh;
+	width: 100%;
+	padding-bottom: 100px;
+}
+
+#lineup {
+	margin: 0 auto;
+	width: 60%;
+	border: 5px red solid;
+	border-radius: 10px;
+	background-color: white;
+	color: black !important;
+}
+#lineup h1 {
+	color: black;
+	text-align: center;
+}
+#lineup div {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+#start-season {
+	display: none;
+}
+#buttons-budget {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+#buttons-budget button {
+	margin: 20px 0;
 }
