@@ -21,6 +21,7 @@ body {
 	background-attachment: fixed;
 }
 #container {
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 }
@@ -169,6 +170,9 @@ ol img {
 	display: flex;
 	align-items: center;
 }
+#constructor-standing {
+	width: 35%;
+}
 #weekend,
 #standing,
 #constructor-standing {
@@ -208,6 +212,7 @@ ol img {
 	display: none;
 }
 #buttons-budget {
+	margin-right: 20px;
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
