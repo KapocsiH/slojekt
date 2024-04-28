@@ -302,3 +302,13 @@ function GetStanding(resultList) {
 		}
 	}
 }
+
+document.getElementById("takemethere").addEventListener("click", function () {
+	var wrapper = document.getElementById("wrapper");
+	var dontdisplay = document.querySelector(".dontdisplay");
+	if (wrapper) {
+		wrapper.outerHTML = "<!-- " + wrapper.outerHTML + " -->";
+		wrapper.classList.add("hidden");
+		dontdisplay.classList = "dodisplay";
+	}
+});

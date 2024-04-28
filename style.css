@@ -26,17 +26,17 @@ body {
 }
 #team-choice {
 	margin: 0 auto;
-	width: 90%;
 }
 #drivers-choice {
 	margin: 0 auto;
 	display: none;
-	width: 90%;
 }
 #drivers-choice-ol,
 #team-choice-ol {
-	padding: 0;
+	padding: 10px;
 	margin-bottom: 30px;
+	width: 450px;
+	height: 300px;
 }
 #drivers-choice-ol li,
 #team-choice-ol li {
@@ -110,10 +110,6 @@ body {
 
 #display {
 	margin: 0;
-}
-
-.dontdisplay {
-	display: none !important;
 }
 
 #f1logo {
@@ -203,6 +199,11 @@ ol img {
 	justify-content: space-around;
 	align-items: center;
 }
+
+#lineup-team img {
+	width: 100px;
+}
+
 #start-season {
 	display: none;
 }
@@ -215,4 +216,34 @@ ol img {
 }
 #buttons-budget button {
 	margin: 20px 0;
+}
+
+.dodisplay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: fit-content;
+	margin-inline: auto;
+}
+
+#team-choice h1,
+#drivers-choice h1 {
+	text-align: center;
+}
+
+.dontdisplay {
+	display: none;
+}
+
+#drivers-choice-ol {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: fit-content;
+	margin-inline: auto;
+}
+
+#team-choice-ol div {
+	height: 150px;
+	width: 150px;
 }
